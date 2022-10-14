@@ -1,0 +1,10 @@
+name: Push to main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    uses: salesforcecli/github-workflows/.github/workflows/githubRelease.yml@main
+    secrets: inherit

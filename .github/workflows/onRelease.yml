@@ -1,0 +1,20 @@
+name: release
+
+on:
+  release:
+    types: [released]
+    inputs:
+      tag:
+        description: tag that needs to publish
+        type: string
+        required: true
+jobs:
+
+  npm:
+    uses: salesforcecli/github-workflows/.github/workflows/npmPublish.yml@main
+    with:
+      ctc: true
+      sign: true
+      tag: latest
+      githubTag: ${{ github.event.release.tag_name || inputs.tag }}
+    secrets: inherit

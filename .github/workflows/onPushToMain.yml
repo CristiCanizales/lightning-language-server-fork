@@ -8,4 +8,4 @@ jobs:
   release:
     uses: salesforcecli/github-workflows/.github/workflows/githubRelease.yml@main
     with:
-      repo-token: ${{ secrets.GITHUB_TOKEN }
+      repo-token: ${{ secrets.GITHUB_TOKEN }}

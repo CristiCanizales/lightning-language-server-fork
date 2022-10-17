@@ -9,12 +9,68 @@ on:
         type: string
         required: true
 jobs:
-#test for demo
-  npm:
-    uses: salesforcecli/github-workflows/.github/workflows/npmPublish.yml@main
-    with:
-      ctc: true
-      sign: true
-      tag: latest
-      githubTag: ${{ github.event.release.tag_name || inputs.tag }}
-    secrets: inherit
+  # npm:
+  #   uses: salesforcecli/github-workflows/.github/workflows/npmPublish.yml@main
+  #   with:
+  #     ctc: true
+  #     sign: true
+  #     tag: latest
+  #     githubTag: ${{ github.event.release.tag_name || inputs.tag }}
+  #   secrets: inherit
+  prepublish:
+    defaults:
+      run:
+        working-directory: "~/lightning-language-server"
+    runs-on: ubuntu-latest
+    container:
+      image: node:14
+    steps:
+    - uses: "./.github/actions/setup-publish"
+    - uses: actions/upload-artifact@v2
+      with:
+        path: |-
+          ./.git
+          ./packages/
+          ./.gitignore
+          ./package.json
+          ./README.md
+          ./yarn.lock
+
+  publish-library:
+    defaults:
+      run:
+        working-directory: "~/lightning-language-server"
+    runs-on: ubuntu-latest
+    container:
+      image: node:14
+    needs:
+    - prepublish
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        path: "~/lightning-language-server"
+    - name: Set .npmrc
+      run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+    - name: Publish to NPM
+      run: |-
+        RELEASE_VERSION="$(node -pe "require('./package.json').version")"
+        TARFILE=$(ls | grep $RELEASE_VERSION.tgz)
+        echo "publishing to npm using ${TARFILE}"
+        npm publish $TARFILE --access public
+
+  publish-plugin:
+    defaults:
+      run:
+        working-directory: "~/lightning-language-server"
+    runs-on: ubuntu-latest
+    container:
+      image: node:14
+    needs:
+    - publish-library
+    steps:
+    - name: CLI NPM Publish
+      uses: salesforcecli/github-workflows/.github/workflows/npmPublish.yml@main
+      with:
+        ctc: true
+        sign: true
+        githubTag: ${{ github.event.release.tag_name || inputs.tag }}

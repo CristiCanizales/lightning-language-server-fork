@@ -20,7 +20,7 @@ jobs:
   prepublish:
     defaults:
       run:
-        working-directory: "~/lightning-language-server"
+        working-directory: "~/lightning-language-server-fork"
     runs-on: ubuntu-latest
     container:
       image: node:14
@@ -39,7 +39,7 @@ jobs:
   publish-library:
     defaults:
       run:
-        working-directory: "~/lightning-language-server/packages"
+        working-directory: "~/lightning-language-server-fork/packages"
     runs-on: ubuntu-latest
     container:
       image: node:14
@@ -61,7 +61,7 @@ jobs:
   publish-plugin:
     defaults:
       run:
-        working-directory: "~/lightning-language-server"
+        working-directory: "~/lightning-language-server-fork"
     runs-on: ubuntu-latest
     container:
       image: node:14

@@ -7,4 +7,6 @@ on:
 jobs:
   release:
     uses: salesforcecli/github-workflows/.github/workflows/githubRelease.yml@main
-    secrets: inherit
+    with:
+      secrets: inherit
+      repo-token: ${{ secrets.GITHUB_TOKEN }}

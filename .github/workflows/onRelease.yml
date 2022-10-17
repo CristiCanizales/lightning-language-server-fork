@@ -39,7 +39,7 @@ jobs:
   publish-library:
     defaults:
       run:
-        working-directory: "~/lightning-language-server"
+        working-directory: "~/lightning-language-server/packages"
     runs-on: ubuntu-latest
     container:
       image: node:14

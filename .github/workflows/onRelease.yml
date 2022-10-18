@@ -25,7 +25,8 @@ jobs:
     container:
       image: node:14
     steps:
-    - uses: ./.github/actions/setup-publish/action.yml@main
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup-publish
     - uses: actions/upload-artifact@v2
       with:
         path: |-

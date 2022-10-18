@@ -31,7 +31,7 @@ jobs:
         git commit -m "Updated version $RELEASE_TAG [ci skip]"
     - name: Set .npmrc
       run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-    - run: yarn publish-lsp
+    # - run: yarn publish-lsp
     - run: git push origin main
     - name: Tag the release and push to repo
       run: |-

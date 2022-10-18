@@ -19,14 +19,6 @@ jobs:
       image: node:lts
     steps:
     - uses: actions/download-artifact@v2
-    # Ensure parameter if_key_exists is set correctly
-    # - name: Install SSH key
-    #   uses: shimataro/ssh-key-action@v2
-    #   with:
-    #     key: "${{ secrets.CIRCLE_CI_SSH_KEY }}"
-    #     name: circle_ci_id_rsa
-    #     known_hosts: "${{ secrets.CIRCLE_CI_KNOWN_HOSTS }}"
-    #     if_key_exists: fail
     - uses: actions/checkout@v2
     - name: Configuring GitHub
       run: |-
@@ -35,13 +27,13 @@ jobs:
         git config user.name "Release Bot"
     - name: Bump package version
       run: |-
-        yarn bump-versions << pipeline.parameters.version >>
+        yarn bump-versions 'minor'
         git add .
         export RELEASE_TAG="$(node -pe "require('./lerna.json').version")"
         git commit -m "Updated version $RELEASE_TAG [ci skip]"
     - name: Set .npmrc
       run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-    - run: yarn publish-lsp
+    # - run: yarn publish-lsp
     - run: git push origin main
     - name: Tag the release and push to repo
       run: |-

@@ -37,3 +37,12 @@ jobs:
         export RELEASE_TAG="$(node -pe "require('./lerna.json').version")"
         git tag v${RELEASE_TAG}
         git push --tags
+    - name: Create Github Release
+      uses: actions/create-release@v1
+      if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.SF_IDEE_BOT_GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.changelog.outputs.tag }}
+        release_name: ${{ steps.changelog.outputs.tag }}
+        body: ${{ steps.changelog.outputs.clean_changelog }}

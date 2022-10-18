@@ -24,7 +24,8 @@ jobs:
         git config user.name "Release Bot"
     - name: Bump package version
       run: |-
-        yarn bump-versions << pipeline.parameters.version >>
+        yarn
+        yarn bump-versions 'minor'
         git add .
         export RELEASE_TAG="$(node -pe "require('./lerna.json').version")"
         git commit -m "Updated version $RELEASE_TAG [ci skip]"

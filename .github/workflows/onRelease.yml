@@ -18,8 +18,18 @@ jobs:
   #     githubTag: ${{ github.event.release.tag_name || inputs.tag }}
   #   secrets: inherit
 
-  setup-publish:
-    uses: ./.github/actions/setup-publish/action.yml@main
+  setup_publish:
+    defaults:
+      run:
+        working-directory: "~/lightning-language-server-fork"
+    runs-on: ubuntu-latest
+    container:
+      image: node:14
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Setup publish
+        uses: ./.github/actions/setup-publish/action.yml@main
   prepublish:
     defaults:
       run:
@@ -30,10 +40,6 @@ jobs:
     needs:
     - setup-publish
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v3
-    - name: Use local setup-publish
-      uses: ./.github/actions/setup-publish
     - uses: actions/upload-artifact@v2
       with:
         path: |-

@@ -9,9 +9,6 @@ jobs:
       uses: salesforcecli/github-workflows/.github/workflows/unitTest.yml@main
   release:
     if: contains('refs/heads/main', github.ref)
-    defaults:
-      run:
-        working-directory: "~/lightning-language-server"
     runs-on: ubuntu-latest
     container:
       image: node:lts
@@ -19,8 +16,6 @@ jobs:
     - tests
     steps:
     - uses: actions/download-artifact@v2
-      with:
-        path: "~/lightning-language-server"
     # Ensure parameter if_key_exists is set correctly
     # - name: Install SSH key
     #   uses: shimataro/ssh-key-action@v2

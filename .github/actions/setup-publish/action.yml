@@ -4,8 +4,7 @@ description: Build and package to prepare for publishing.
 runs:
   using: composite
   steps:
-  - uses: "./.github/actions/gitConfig"
-  - uses: actions/checkout@v3
+  - uses: ./.github/actions/gitConfig
   - name: Setup Node.js
     uses: actions/setup-node@v3
     with:

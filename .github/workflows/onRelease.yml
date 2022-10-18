@@ -15,14 +15,14 @@ jobs:
     if: contains('refs/heads/main', github.ref)
     defaults:
       run:
-        working-directory: "~/lightning-language-server"
+        working-directory: "~/lightning-language-server-fork"
     runs-on: ubuntu-latest
     container:
       image: node:lts
     steps:
     - uses: actions/download-artifact@v2
       with:
-        path: "~/lightning-language-server"
+        path: "~/lightning-language-server-fork"
     # Ensure parameter if_key_exists is set correctly
     # - name: Install SSH key
     #   uses: shimataro/ssh-key-action@v2

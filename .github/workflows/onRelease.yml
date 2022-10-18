@@ -17,6 +17,9 @@ jobs:
   #     tag: latest
   #     githubTag: ${{ github.event.release.tag_name || inputs.tag }}
   #   secrets: inherit
+
+  setup-publish:
+    uses: ./.github/actions/setup-publish/action.yml@main
   prepublish:
     defaults:
       run:
@@ -24,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14
+    needs:
+    - setup-publish
     steps:
     - name: Check out repository
       uses: actions/checkout@v3

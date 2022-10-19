@@ -1,5 +1,6 @@
 name: Slack notification for Github Actions
 on:
+  workflow_dispatch:
   workflow_run:
     workflows:
       - Push to main
@@ -17,49 +18,45 @@ jobs:
         uses: slackapi/slack-github-action@v1.22.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.IDEE_RELEASE_ALERT_SLACK_WEBHOOK }}
-          # SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          SLACK_CHANNEL: pdt_releases
+          # SLACK_CHANNEL: pdt_releases
         with:
           payload: |
             {
-              "body":
-              {
-                "blocks": [
-                  {
-                    "type": "header",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "GitHub Actions Notification",
-                      "emoji": true
-                    }
-                  },
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": ":announcement: `${{ github.event.workflow_run.name }}` run : ${{ github.event.workflow_run.repository.name }} :announcement:"
-                    }
-                  },
-                  {
-                    "type": "divider"
-                  },
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "*Repo*: ${{ github.event.workflow_run.repository.html_url }}\n*Workflow name*: `${{ github.event.workflow_run.name }}`\n*Job url*: ${{ github.event.workflow_run.html_url }}"
-                    }
-                  },
-                  {
-                    "type": "divider"
-                  },
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "*Result*: ${{ github.event.workflow_run.conclusion }}<https://google.com|this is a link>"
-                    }
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "GitHub Actions Notification",
+                    "emoji": true
                   }
-                ]
-              }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":announcement: `${{ github.event.workflow_run.name }}` run : ${{ github.event.workflow_run.repository.name }} :announcement:"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Repo*: ${{ github.event.workflow_run.repository.html_url }}\n*Workflow name*: `${{ github.event.workflow_run.name }}`\n*Job url*: ${{ github.event.workflow_run.html_url }}"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Result*: ${{ github.event.workflow_run.conclusion }}<https://google.com|this is a link>"
+                  }
+                }
+              ]
             }

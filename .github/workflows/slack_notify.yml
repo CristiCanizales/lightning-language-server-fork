@@ -20,7 +20,7 @@ jobs:
           payload: |
             {
               "text": "GitHub Actions Notification",
-              "event": "${{ github.event.workflow_run.name }} run: ${{ github.event.workflow_run.html_url }}",
+              "event": "${{ github.event.workflow_run.name }}, run: ${{ github.event.workflow_run.html_url }}",
               "repo": "${{ github.event.workflow_run.repository.name }}",
               "result": "${{ github.event.workflow_run.conclusion }}"
             }

@@ -20,12 +20,10 @@ jobs:
           payload: |
             {
               "color": "#f2c744",
-              "text": "GitHub Actions Notification :announcement:",
-              "event": "*Workflow name*: `${{ github.event.workflow_run.name }}` run : ${{ github.event.workflow_run.repository.name }}",
-              "repo": ${{ github.event.workflow_run.repository.html_url }},
-              "job": ${{ github.event.workflow_run.html_url }},
-              "result": ${{ github.event.workflow_run.conclusion }},
-              # "<https://google.com|this is a link>"
+              "text": "GitHub Actions Notification",
+              "event": "<${{ github.event.workflow_run.html_url }}|${{ github.event.workflow_run.name }}>",
+              "repo": "<${{ github.event.workflow_run.repository.html_url }}|${{ github.event.workflow_run.repository.name }}>",
+              "result": `${{ github.event.workflow_run.conclusion }}`,
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.IDEE_RELEASE_ALERT_SLACK_WEBHOOK }}

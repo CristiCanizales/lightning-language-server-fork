@@ -16,12 +16,10 @@ jobs:
     steps:
       - name: Announce result
         uses: slackapi/slack-github-action@v1.22.0
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.IDEE_RELEASE_ALERT_SLACK_WEBHOOK }}
-          # SLACK_CHANNEL: pdt_releases
         with:
           payload: |
             {
+              "text": "Hello world :tada:",
               "blocks": [
                 {
                   "type": "header",
@@ -60,3 +58,7 @@ jobs:
                 }
               ]
             }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.IDEE_RELEASE_ALERT_SLACK_WEBHOOK }}
+          SLACK_CHANNEL: pdt_releases
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

@@ -21,9 +21,11 @@ jobs:
             {
               "color": "#f2c744",
               "text": "GitHub Actions Notification :announcement:",
-              "event": ":announcement: *Workflow name*: `${{ github.event.workflow_run.name }}` run : ${{ github.event.workflow_run.repository.name }} :announcement:",
-              "details": "*Repo*: ${{ github.event.workflow_run.repository.html_url }}\n*Job url*: ${{ github.event.workflow_run.html_url }}",
-              "result": "*Result*: ${{ github.event.workflow_run.conclusion }}<https://google.com|this is a link>"
+              "event": "*Workflow name*: `${{ github.event.workflow_run.name }}` run : ${{ github.event.workflow_run.repository.name }}",
+              "repo": ${{ github.event.workflow_run.repository.html_url }},
+              "job": ${{ github.event.workflow_run.html_url }},
+              "result": ${{ github.event.workflow_run.conclusion }},
+              # "<https://google.com|this is a link>"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.IDEE_RELEASE_ALERT_SLACK_WEBHOOK }}

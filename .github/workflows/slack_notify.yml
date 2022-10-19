@@ -23,47 +23,12 @@ jobs:
               "text": "Hello world :tada:",
               "blocks": [
                 {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": "This is a markdown block"
-                    }
-                },
-                # {
-                #   "type": "header",
-                #   "text": {
-                #     "type": "plain_text",
-                #     "text": "GitHub Actions Notification",
-                #     "emoji": true
-                #   }
-                # },
-                # {
-                #   "type": "section",
-                #   "text": {
-                #     "type": "mrkdwn",
-                #     "text": ":announcement: `${{ github.event.workflow_run.name }}` run : ${{ github.event.workflow_run.repository.name }} :announcement:"
-                #   }
-                # },
-                # {
-                #   "type": "divider"
-                # },
-                # {
-                #   "type": "section",
-                #   "text": {
-                #     "type": "mrkdwn",
-                #     "text": "*Repo*: ${{ github.event.workflow_run.repository.html_url }}\n*Workflow name*: `${{ github.event.workflow_run.name }}`\n*Job url*: ${{ github.event.workflow_run.html_url }}"
-                #   }
-                # },
-                # {
-                #   "type": "divider"
-                # },
-                # {
-                #   "type": "section",
-                #   "text": {
-                #     "type": "mrkdwn",
-                #     "text": "*Result*: ${{ github.event.workflow_run.conclusion }}<https://google.com|this is a link>"
-                #   }
-                # }
+                  "type": "section",
+                  "text": {
+                      "type": "mrkdwn",
+                      "text": "This is a markdown block"
+                  }
+                }
               ]
             }
         env:

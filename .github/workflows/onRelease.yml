@@ -4,20 +4,12 @@ on:
   push:
     tags:
       - v*
-  # release:
-  #   types: [released]
-  #   inputs:
-  #     tag:
-  #       description: tag that needs to publish
-  #       type: string
-  #       required: true
 jobs:
   publish:
     runs-on: ubuntu-latest
     container:
       image: node:lts
     steps:
-    - uses: actions/download-artifact@v2
     - uses: actions/checkout@v2
   npm:
     runs-on: ubuntu-latest

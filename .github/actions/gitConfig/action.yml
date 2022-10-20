@@ -6,7 +6,5 @@ runs:
   steps:
     - run: git config --global push.default current
       shell: bash
-    - run: git config --global user.email ${{ secrets.GH_EMAIL }}
-      shell: bash
     - run: git config --global user.name 'Release Bot'
       shell: bash

@@ -15,7 +15,9 @@ jobs:
     - tests
     steps:
     - uses: actions/checkout@v3
-    - uses: ./.github/actions/setup-publish
+    - uses: ./.github/actions/gitConfig
+      with:
+        email: ${{ secrets.GH_EMAIL }}
     - name: Conventional Changelog Action
       id: changelog
       uses: TriPSs/conventional-changelog-action@d360fad3a42feca6462f72c97c165d60a02d4bf2

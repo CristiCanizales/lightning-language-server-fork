@@ -6,7 +6,7 @@ on:
 
 jobs:
   tests:
-      uses: salesforcecli/github-workflows/.github/workflows/unitTest.yml@main
+    uses: salesforcecli/github-workflows/.github/workflows/unitTest.yml@main
   release:
     runs-on: ubuntu-latest
     container:
@@ -15,7 +15,6 @@ jobs:
     - tests
     steps:
     - uses: actions/checkout@v3
-    - name: Configuring GitHub
     - uses: ./.github/actions/setup-publish
     - name: Conventional Changelog Action
       id: changelog

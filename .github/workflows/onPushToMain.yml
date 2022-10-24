@@ -24,17 +24,17 @@ jobs:
       with:
         git-user-name: Release Bot
         git-user-email: ${{ secrets.GH_EMAIL }}
-        github-token: ${{ secrets.GH_TOKEN }}
+        github-token: ${{ secrets.SF_IDEE_BOT_GITHUB_TOKEN }}
         skip-version-file: true
         output-file: false
         tag-prefix: ""
         pre-commit: ./scripts/bump-lerna-version.js
-        fallback-version: 3.22.0
+        fallback-version: 3.23.0
     - name: Create Github Release
       uses: actions/create-release@v1
       if: ${{ steps.changelog.outputs.skipped == 'false' }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.SF_IDEE_BOT_GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.changelog.outputs.tag }}
         release_name: ${{ steps.changelog.outputs.tag }}
